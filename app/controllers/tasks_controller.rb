@@ -20,6 +20,18 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
+  def edit
+    @task = Task.find(params[:id])
+  end
+
+  def update
+    @task = Task.find(params[:id])
+    @task.update_attributes(task_params)
+
+    redirect_to tasks_path(@task)
+  end
+
+
    private 
 
    def task_params
