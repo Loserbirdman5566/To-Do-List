@@ -9,12 +9,16 @@ class TasksController < ApplicationController
   end
    
     # Cteate CURD's create: create action
-   def create
-     @task = Task.new(task_params)
-     @task.save
+  def create
+   @task = Task.new(task_params)
+   @task.save
 
-     redirect_to tasks_url
-   end
+   redirect_to tasks_url
+  end
+
+  def show
+    @task = Task.find(params[:id])
+  end
 
    private 
 
