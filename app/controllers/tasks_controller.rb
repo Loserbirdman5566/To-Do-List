@@ -13,9 +13,11 @@ class TasksController < ApplicationController
     # Cteate CURD's create: create action
   def create
    @task = Task.new(task_params)
-   @task.save
-
-   redirect_to tasks_url
+   if @task.save
+     redirect_to tasks_url 
+   else
+     render :action => :new
+   end
   end
 
   def show
@@ -25,9 +27,13 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task.update_attributes(task_params)
-
-    redirect_to tasks_path(@task)
+    if @task.update_attributes(task_params)
+      redirect_to tasks_path(@task)
+      
+    else
+      render :action => :edit
+    end
+    
   end
 
   def destroy
