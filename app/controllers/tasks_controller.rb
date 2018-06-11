@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
 
+  before_action :set_task, :only => [:show, :edit, :update, :destroy]
+
   def index
    @tasks = Task.all
   end
@@ -17,25 +19,39 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
     @task.update_attributes(task_params)
 
     redirect_to tasks_path(@task)
   end
 
+  def destroy
+      if @task.can_destroy?
+        @task.destroy
+        flash[:notice] =  "Task was successfully destroyed"
+        redirect_to tasks_url
+      else
+        flash[:notice]= "Task expired can't be deleted"
+        redirect_to tasks_url
+      end  
+
+  end
 
    private 
+
+   def set_task
+     @task = Task.find(params[:id])
+   end
 
    def task_params
      params.require(:task).permit(:name, :due_date, :note)
    end
 
 end
+
+    
