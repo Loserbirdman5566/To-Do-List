@@ -8,19 +8,27 @@
   </ul>
 <% end %>
 
+ <!-- 套用Bootstrap Framework 優化 UI 介面 -->
+
 
 <%= form_for (@task) do |f| %>
-    
+ <div class="form-group">
   <%= f.label :name, "Name" %>
   <%= f.text_field :name %>
+ </div> 
 
+ <div class="form-group">  
   <%= f.label :due_date, "Due Date" %>
   <%= f.text_field :due_date %>
+ </div> 
 
+ <div class="form-group">   
   <%= f.label :note, "Note" %>
   <%= f.text_field :note %>
+ </div>
 
+ <div class="form-group">   
   <%= f.submit  %>
-
+</div>
 <% end %>
   
