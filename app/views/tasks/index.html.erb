@@ -1,12 +1,29 @@
+<div class=" container table">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Status</th>
+        <th scope="col">Task</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Detial</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>            
+          <% @tasks.each do |task| %>
+            <tr>
+              <td> <input type="checkbox"</td>
+              <td> <%= task.name %> </td>
+              <td> <%= task.due_date %> </td>
+              <td> <%= link_to "<span class='glyphicon glyphicon-search' ></span> Show".html_safe, task_path(task),    class: "btn btn-danger"  %> </td>
+              <td> <%= link_to "<span class='glyphicon glyphicon-edit'></span>  Edit".html_safe, edit_task_path(task), class: "btn btn-info" %> </td>
+              <td> <%= link_to "<span class='glyphicon glyphicon-trash'></span> Trash ".html_safe, task_path(task),    class: "btn btn-success", method: :delete, data:{ confirm: "Are you sure?"} %> </td>
+            </tr>  
+          <% end %>         
+    </tbody>
+  </table>
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span> New Task".html_safe, new_task_path, class: "btn btn-primary btn-lg"  %>
+</div>
 
-<ol>
-  <% @tasks.each do |task| %>
-    <li>
-      <%= task.name %>
-      <%= link_to 'Show', task_path(task)  %>
-      <%= link_to 'Edit', edit_task_path(task) %>
-      <%= link_to 'Destroy', task_path(task), method: :delete, data:{ confirm: "Are you sure?"} %>
-    </li>  
-  <% end %>
-</ol>
-<%= link_to 'New Task', new_task_path  %>
+
